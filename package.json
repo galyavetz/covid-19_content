@@ -1,0 +1,15 @@
+{
+  "name": "whatsapp-email-bot",
+  "version": "1.0.0",
+  "description": "Forward WhatsApp messages to email",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "nodemailer": "^6.9.13",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.23.0"
+  }
+}

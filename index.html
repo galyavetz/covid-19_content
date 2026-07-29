@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>דוגיסיטינג באהבה 🐾</title>
+<style>
+  :root {
+    --cream: #fdf6ec;
+    --brown: #5b3a29;
+    --orange: #e8843a;
+    --orange-dark: #c96a24;
+    --paw: #d8b48a;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--cream);
+    color: var(--brown);
+    font-family: "Varela Round", "Segoe UI", Rubik, Arial, sans-serif;
+    overflow-x: hidden;
+  }
+  body {
+    background-image:
+      radial-gradient(circle at 10% 15%, rgba(232,132,58,0.08) 0, transparent 8%),
+      radial-gradient(circle at 85% 25%, rgba(232,132,58,0.08) 0, transparent 8%),
+      radial-gradient(circle at 20% 80%, rgba(232,132,58,0.08) 0, transparent 8%),
+      radial-gradient(circle at 90% 85%, rgba(232,132,58,0.08) 0, transparent 8%);
+  }
+  .wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+  }
+  .card {
+    background: #fffaf2;
+    border: 3px solid var(--orange);
+    border-radius: 28px;
+    padding: 28px 22px;
+    box-shadow: 0 10px 30px rgba(91,58,41,0.12);
+    position: relative;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  h1 {
+    font-size: 2.1rem;
+    margin: 0 0 6px;
+    line-height: 1.25;
+    color: var(--orange-dark);
+    text-shadow: 2px 2px 0 rgba(232,132,58,0.15);
+  }
+  h1 .paw { font-size: 1.6rem; vertical-align: -2px; }
+  .tagline {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--brown);
+  }
+  .dog-emoji {
+    font-size: 4.2rem;
+    text-align: center;
+    margin: 6px 0 10px;
+    animation: wag 2.2s ease-in-out infinite;
+  }
+  @keyframes wag {
+    0%, 100% { transform: rotate(-4deg); }
+    50% { transform: rotate(4deg); }
+  }
+  .intro {
+    background: #fff2df;
+    border: 2px dashed var(--orange);
+    border-radius: 18px;
+    padding: 14px 16px;
+    font-size: 1.02rem;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 22px;
+  }
+  .section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--orange-dark);
+    margin: 0 0 12px;
+  }
+  .section-title::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--orange) 0 6px, transparent 6px 12px);
+  }
+  .prices {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border: 2px solid var(--paw);
+    border-radius: 16px;
+    padding: 12px 16px;
+  }
+  .price-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .price-value {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--orange-dark);
+    background: #fff2df;
+    border-radius: 12px;
+    padding: 4px 14px;
+    min-width: 62px;
+    text-align: center;
+  }
+  .discount-badge {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 6px;
+  }
+  .info-block {
+    background: #fff;
+    border: 2px solid var(--paw);
+    border-radius: 16px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+  }
+  .contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .contact-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: var(--orange);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 16px;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 6px 14px rgba(232,132,58,0.35);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .contact-btn:active {
+    transform: scale(0.97);
+  }
+  .contact-btn .num {
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-size: 1.05rem;
+    opacity: 0.95;
+  }
+  footer {
+    text-align: center;
+    margin-top: 26px;
+    font-size: 1.6rem;
+    letter-spacing: 10px;
+    opacity: 0.6;
+  }
+  .hearts {
+    text-align: center;
+    margin-top: 4px;
+    font-size: 1rem;
+    color: var(--orange-dark);
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <header>
+        <h1><span class="paw">🐾</span> דוגיסיטינג באהבה! <span class="paw">🐾</span></h1>
+        <div class="tagline">שמירה, טיולים ומשחקים לכלב שלכם ❤️</div>
+      </header>
+
+      <div class="dog-emoji">🐶</div>
+
+      <div class="intro">
+        אנחנו אוהבים כלבים ואשמח לטייל,<br>
+        לשחק ולשמור על הכלב שלכם! 🐕
+      </div>
+
+      <div class="section-title">🐾 מחירים</div>
+      <div class="prices">
+        <div class="price-row">
+          <div class="price-label">🕐 שעה ראשונה</div>
+          <div class="price-value">30 ₪</div>
+        </div>
+        <div class="price-row">
+          <div class="price-label">🕑 שעה שנייה <span class="discount-badge">הנחה!</span></div>
+          <div class="price-value">20 ₪</div>
+        </div>
+      </div>
+
+      <div class="section-title">📍 איפה אנחנו</div>
+      <div class="info-block">
+        📍 אנחנו באזור גני תקווה
+      </div>
+
+      <div class="section-title">📞 לפרטים</div>
+      <div class="contacts">
+        <a class="contact-btn" href="tel:0546207760">
+          <span>דניאל</span>
+          <span class="num">054-620-7760</span>
+        </a>
+        <a class="contact-btn" href="tel:0508727525">
+          <span>עומרי</span>
+          <span class="num">050-872-7525</span>
+        </a>
+      </div>
+
+      <div class="hearts">🐾 ❤️ 🐾</div>
+    </div>
+    <footer>🐾 🐾 🐾</footer>
+  </div>
+</body>
+</html>

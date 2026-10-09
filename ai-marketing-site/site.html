@@ -1,0 +1,534 @@
+<title>שיווק בעידן ה-AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karantina:wght@400;700&family=Assistant:wght@400;600;800&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: billboard hero with a live "campaign generator", then the syllabus as a media plan of 7 channels, a then/now switch, a student stage, and a closing CTA band. */
+:root{
+  --bg:#F2F3FA; --surface:#FFFFFF; --ink:#0D0E2B; --muted:#5A5D7D; --line:#D7D9EA;
+  --cobalt:#2B37FF; --coral:#FF4B36; --sun:#FFD233; --mint:#12B886; --pink:#F03DA0; --sky:#14A3F0; --violet:#7A4DFF;
+  --on-color:#0D0E2B; --on-cobalt:#FFFFFF;
+  --display:"Karantina","Assistant","Arial Narrow",sans-serif;
+  --body:"Assistant","Segoe UI",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0A0B1C; --surface:#13152E; --ink:#ECEDFA; --muted:#A3A6C6; --line:#272A4C;
+  --cobalt:#5B65FF; --coral:#FF6450; --sun:#FFD84D; --mint:#2DD4A0; --pink:#FF5CB3; --sky:#3DB8FF; --violet:#9677FF;
+  --on-color:#0A0B1C; --on-cobalt:#FFFFFF; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0A0B1C; --surface:#13152E; --ink:#ECEDFA; --muted:#A3A6C6; --line:#272A4C;
+  --cobalt:#5B65FF; --coral:#FF6450; --sun:#FFD84D; --mint:#2DD4A0; --pink:#FF5CB3; --sky:#3DB8FF; --violet:#9677FF;
+  --on-color:#0A0B1C; --on-cobalt:#FFFFFF; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden}
+.site{direction:rtl}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:clamp(16px,4vw,40px)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:.9;margin:0;text-wrap:balance;letter-spacing:.01em}
+p{margin:0}
+.eyebrow{font-family:var(--body);font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:24px;padding-block:14px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800}
+.logo b{font-family:var(--display);font-size:30px;line-height:1;background:var(--cobalt);color:var(--on-cobalt);padding:4px 10px 0;direction:ltr}
+.logo span{font-size:13px;line-height:1.2;color:var(--muted);font-weight:600}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0 auto 0 0;padding:0;font-weight:600;font-size:15px}
+.nav ul a{text-decoration:none;opacity:.8}
+.nav ul a:hover{opacity:1;color:var(--cobalt)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:800;font-size:16px;border:2px solid var(--ink);padding:12px 22px;text-decoration:none;cursor:pointer;background:var(--ink);color:var(--bg);transition:transform .15s, box-shadow .15s}
+.btn:hover{transform:translate(3px,-3px);box-shadow:-6px 6px 0 var(--coral)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.nav .btn{padding:8px 16px;font-size:14px}
+
+/* hero */
+.hero{padding-block:56px 40px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center}
+.hero-grid>*{min-width:0}
+.hero h1{font-size:clamp(84px,13vw,190px);margin-block:14px 18px}
+.hero h1 .ai{display:inline-block;background:var(--cobalt);color:var(--on-cobalt);padding:.06em .12em 0;direction:ltr;position:relative;transform:rotate(-3deg)}
+.hero h1 .ai::after{content:"";display:inline-block;width:.06em;height:.62em;background:var(--sun);margin-inline-start:.05em;vertical-align:-.02em;animation:blink 1s steps(1) infinite}
+.hero h1 .era{color:var(--coral)}
+@keyframes blink{50%{opacity:0}}
+.lead{font-size:clamp(18px,2vw,21px);max-width:34em;color:var(--muted)}
+.lead strong{color:var(--ink)}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
+.facts{display:flex;flex-wrap:wrap;gap:28px;margin-top:36px;padding-top:20px;border-top:1px dashed var(--line)}
+.facts div{display:flex;flex-direction:column}
+.facts b{font-family:var(--display);font-size:46px;line-height:1}
+.facts span{font-size:14px;color:var(--muted)}
+
+/* generator */
+.gen{background:var(--surface);border:2px solid var(--ink);box-shadow:-12px 12px 0 var(--cobalt);padding:22px;position:relative}
+.gen-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.dots{display:flex;gap:6px}
+.dots i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.dots i:nth-child(1){background:var(--coral)}.dots i:nth-child(2){background:var(--sun)}.dots i:nth-child(3){background:var(--mint)}
+.gen label{display:block;font-weight:700;font-size:14px;margin-bottom:6px}
+.gen-form{display:grid;grid-template-columns:1fr auto;gap:10px}
+.gen input,.gen select{font:inherit;font-size:16px;padding:10px 12px;border:2px solid var(--ink);background:var(--bg);color:var(--ink);min-width:0;border-radius:0}
+.tones{display:flex;gap:8px;margin-block:12px 4px;flex-wrap:wrap}
+.tone{font:inherit;font-size:14px;font-weight:700;border:2px solid var(--line);background:transparent;color:var(--ink);padding:5px 12px;border-radius:99px;cursor:pointer}
+.tone[aria-pressed="true"]{border-color:var(--ink);background:var(--sun);color:var(--on-color)}
+.gen-btn{font:inherit;font-weight:800;background:var(--coral);color:var(--on-color);border:2px solid var(--ink);padding:10px 16px;cursor:pointer}
+.gen-btn:hover{background:var(--sun)}
+.out{margin-top:16px;border-top:2px solid var(--ink);padding-top:14px;display:grid;gap:10px}
+.out .slogan{font-family:var(--display);font-size:clamp(34px,3.6vw,46px);line-height:.95;min-height:2em}
+.out dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:15px}
+.out dt{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:3px}
+.out dd{margin:0;font-weight:600}
+.tag{display:inline-block;background:var(--cobalt);color:var(--on-cobalt);padding:0 8px;font-weight:700;direction:ltr}
+.disclaimer{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* stickers */
+.sticker{position:absolute;font-family:var(--display);font-size:26px;line-height:1;padding:10px 14px 6px;border:2px solid var(--ink);background:var(--sun);color:var(--on-color);transform:rotate(8deg);top:-22px;left:-14px;z-index:2}
+
+/* marquee */
+.marquee{border-block:2px solid var(--ink);background:var(--ink);color:var(--bg);overflow:hidden;direction:ltr}
+.track{display:flex;width:max-content;animation:scroll 38s linear infinite}
+.track span{font-family:var(--display);font-size:40px;padding:12px 22px 6px;white-space:nowrap;display:flex;align-items:center;gap:44px}
+.track span::after{content:"✦";color:var(--sun);font-size:24px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* sections */
+section{padding-block:88px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.sec-head h2{font-size:clamp(58px,8vw,110px)}
+.sec-head p{max-width:30em;color:var(--muted)}
+
+/* syllabus */
+.plan{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:2px solid var(--ink);border-right:2px solid var(--ink)}
+.unit{--c:var(--cobalt);position:relative;padding:26px 26px 30px;border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);background:var(--surface);display:flex;flex-direction:column;gap:12px;min-height:310px;transition:background .25s,color .25s;overflow:hidden}
+.unit:nth-child(1){--c:var(--sun)}.unit:nth-child(2){--c:var(--sky)}.unit:nth-child(3){--c:var(--coral)}
+.unit:nth-child(4){--c:var(--mint)}.unit:nth-child(5){--c:var(--pink)}.unit:nth-child(6){--c:var(--violet)}
+.unit .num{font-family:var(--display);font-size:96px;line-height:.8;color:var(--c);-webkit-text-stroke:2px var(--ink);direction:ltr;text-align:right;transition:color .25s}
+.unit .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--muted);direction:ltr;text-align:right}
+.unit h3{font-size:48px}
+.unit p{color:var(--muted);font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.chips li{list-style:none;font-size:13px;font-weight:700;border:1.5px solid var(--ink);padding:1px 10px;border-radius:99px}
+.chips{padding:0;margin-bottom:0}
+.unit:hover,.unit:focus-within{background:var(--c);color:var(--on-color)}
+.unit:hover p,.unit:hover .kicker,.unit:focus-within p,.unit:focus-within .kicker{color:var(--on-color)}
+.unit:hover .chips li,.unit:focus-within .chips li{border-color:var(--on-color)}
+.unit:hover .num,.unit:focus-within .num{color:var(--surface);-webkit-text-stroke-color:var(--on-color)}
+.unit.final{grid-column:1/-1;--c:var(--cobalt);background:var(--cobalt);color:var(--on-cobalt);flex-direction:row;align-items:center;gap:40px;min-height:0;flex-wrap:wrap}
+.unit.final .num{color:var(--sun);-webkit-text-stroke-color:var(--on-cobalt);font-size:140px}
+.unit.final h3{font-size:clamp(54px,7vw,88px)}
+.unit.final p,.unit.final .kicker{color:var(--on-cobalt);opacity:.85}
+.unit.final .chips li{border-color:var(--on-cobalt)}
+.unit.final:hover,.unit.final:focus-within{color:var(--on-cobalt)}
+.unit.final:hover p,.unit.final:focus-within p{color:var(--on-cobalt)}
+.unit.final .body{flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px}
+.unit.final .btn{background:var(--sun);color:var(--on-color);border-color:var(--on-cobalt)}
+.unit a.stretch{position:absolute;inset:0;z-index:1}
+.unit a.stretch span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* then / now */
+.switch-sec{background:var(--surface);border-block:2px solid var(--ink)}
+.toggle{display:inline-flex;border:2px solid var(--ink);padding:4px;gap:4px;background:var(--bg)}
+.toggle button{font-family:var(--display);font-size:30px;line-height:1;padding:10px 22px 4px;border:0;background:transparent;color:var(--ink);cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.compare>*{min-width:0}
+.rows{display:grid;border-top:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:150px 1fr;gap:20px;padding-block:18px;border-bottom:1px solid var(--line)}
+.row dt{font-weight:700;font-size:14px;color:var(--muted);padding-top:4px}
+.row dd{margin:0;font-size:19px;font-weight:600;transition:opacity .2s}
+.ad{border:2px solid var(--ink);background:var(--bg);padding:18px;position:relative}
+.ad .meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--muted);margin-bottom:12px}
+.ad-canvas{aspect-ratio:4/3;max-width:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:10px;padding:24px;transition:background .3s,color .3s}
+.ad[data-mode="then"] .ad-canvas{background:var(--coral);color:var(--on-color)}
+.ad[data-mode="now"] .ad-canvas{background:var(--cobalt);color:var(--on-cobalt)}
+.ad-canvas h4{font-family:var(--display);font-size:clamp(48px,6vw,76px);line-height:.9;margin:0}
+.ad-canvas p{font-weight:600}
+.ad .metric{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-weight:700}
+.bar{flex:1;height:10px;background:var(--line);margin-inline:14px;position:relative}
+.bar i{position:absolute;inset-block:0;right:0;background:var(--mint);transition:width .5s}
+.ad .metric b{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* students */
+.stage{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.pitch{border:2px solid var(--ink);background:var(--surface);display:flex;flex-direction:column}
+.pitch .cover{aspect-ratio:16/10;max-width:100%;display:flex;align-items:end;padding:18px;font-family:var(--display);font-size:44px;line-height:.9;border-bottom:2px solid var(--ink);position:relative;color:var(--on-color)}
+.pitch:nth-child(1) .cover{background:var(--sun)}
+.pitch:nth-child(2) .cover{background:var(--mint)}
+.pitch:nth-child(3) .cover{background:var(--pink)}
+.pitch .cover small{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:11px;background:var(--on-color);color:var(--surface);padding:2px 8px;letter-spacing:.06em}
+.pitch .info{padding:18px;display:grid;gap:8px}
+.pitch .info p{color:var(--muted);font-size:15px}
+.pitch .team{font-weight:700;font-size:13px;color:var(--muted)}
+.vote{display:flex;align-items:center;gap:10px;margin-top:6px}
+.vote button{font:inherit;font-weight:800;font-size:14px;border:2px solid var(--ink);background:transparent;color:var(--ink);padding:4px 12px;cursor:pointer}
+.vote button[aria-pressed="true"]{background:var(--coral);color:var(--on-color)}
+.vote span{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+.note{margin-top:18px;font-size:13px;color:var(--muted)}
+
+/* cta */
+.cta-band{background:var(--sun);color:var(--on-color);border-top:2px solid var(--ink);padding-block:80px}
+.cta-band .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center}
+.cta-band h2{font-size:clamp(64px,9vw,130px)}
+.cta-band p{font-size:19px;font-weight:600}
+.cta-band .btn{background:var(--on-color);color:var(--sun);border-color:var(--on-color)}
+.cta-band .btn.ghost{background:transparent;color:var(--on-color)}
+footer{background:var(--ink);color:var(--bg);padding-block:36px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;font-size:14px}
+footer b{font-family:var(--display);font-size:28px;font-weight:700}
+
+@media (max-width:960px){
+  .hero-grid,.compare,.cta-band .wrap{grid-template-columns:1fr}
+  .plan{grid-template-columns:1fr 1fr}
+  .stage{grid-template-columns:1fr}
+  .nav ul{display:none}
+  .nav .btn{margin-inline-start:auto}
+  .gen{margin-top:20px}
+}
+@media (max-width:620px){
+  .plan{grid-template-columns:1fr}
+  .unit{min-height:0}
+  .row{grid-template-columns:1fr;gap:4px}
+  .unit.final .num{font-size:100px}
+  section{padding-block:64px}
+  .logo span{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .track{animation:none}
+  .hero h1 .ai::after{animation:none}
+  *{transition:none!important}
+}
+</style>
+
+<div class="site" dir="rtl" lang="he">
+
+<nav class="nav" aria-label="ניווט ראשי">
+  <div class="wrap">
+    <a class="logo" href="#top"><b>AI/MKT</b><span>שיווק בעידן ה-AI<br>אוניברסיטת בר-אילן</span></a>
+    <ul>
+      <li><a href="#plan">סילבוס</a></li>
+      <li><a href="#switch">אז ועכשיו</a></li>
+      <li><a href="#stage">במת הסטודנטים</a></li>
+      <li><a href="#join">הרשמה</a></li>
+    </ul>
+    <a class="btn" href="#join">אני בפנים ←</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">המחלקה למדעי המידע ויישומי בינה מלאכותית · אוניברסיטת בר-אילן</p>
+      <h1>שיווק<br><span class="era">בעידן ה־</span><span class="ai">AI</span></h1>
+      <p class="lead">הקורס שבו <strong>מבינים איך מותגים נבנים</strong> בעולם שבו האלגוריתם הוא חלק מקהל היעד. מהפאנל הראשון ועד הקמפיין שכתב סוכן, ובסוף עומדים על הבמה ומציגים אסטרטגיה משלכם.</p>
+      <div class="cta-row">
+        <a class="btn" href="#plan">לסילבוס המלא</a>
+        <a class="btn ghost" href="#stage">לפרזנטציות של הסטודנטים</a>
+      </div>
+      <div class="facts" aria-label="הקורס במספרים">
+        <div><b>6</b><span>יחידות לימוד</span></div>
+        <div><b>1</b><span>פרזנטציה שיווקית בסוף</span></div>
+        <div><b>0</b><span>שקפים משעממים (מבטיחים)</span></div>
+      </div>
+    </div>
+
+    <aside class="gen" aria-labelledby="gen-title">
+      <div class="sticker">נסו אותי!</div>
+      <div class="gen-head">
+        <span class="eyebrow" id="gen-title">מחולל קמפיין · דמו</span>
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+      </div>
+      <form id="genForm">
+        <label for="product">מה משווקים היום?</label>
+        <div class="gen-form">
+          <input id="product" value="קפה קר בפחית" maxlength="40" autocomplete="off">
+          <button class="gen-btn" type="submit">צור ✦</button>
+        </div>
+        <div class="tones" role="group" aria-label="טון הקמפיין">
+          <button type="button" class="tone" data-tone="bold" aria-pressed="true">נועז</button>
+          <button type="button" class="tone" data-tone="funny" aria-pressed="false">מצחיק</button>
+          <button type="button" class="tone" data-tone="warm" aria-pressed="false">מרגש</button>
+        </div>
+      </form>
+      <div class="out" aria-live="polite">
+        <div class="slogan" id="slogan">קפה קר בפחית. לא מחכים לאף אחד.</div>
+        <dl>
+          <dt>PERSONA</dt><dd id="persona">סטודנטית בת 22, שלוש משמרות בשבוע, אפס זמן</dd>
+          <dt>CHANNEL</dt><dd id="channel">טיקטוק + סטוריז, בשעות 07:00 עד 09:00</dd>
+          <dt>KPI</dt><dd id="kpi">שיעור צפייה מלאה בסרטון של 15 שניות</dd>
+          <dt>TAG</dt><dd><span class="tag" id="hashtag">#NoWaitCoffee</span></dd>
+        </dl>
+      </div>
+      <p class="disclaimer">דמו להמחשה בלבד. בקורס בונים את הדבר האמיתי.</p>
+    </aside>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Persona</span><span>CTR</span><span>Growth Hacking</span><span>Prompt</span><span>Disruption</span><span>Brand Love</span><span>A/B Test</span><span>Creator Economy</span><span>Funnel</span><span>Binge</span><span>Agentic</span><span>ROAS</span>
+    <span>Persona</span><span>CTR</span><span>Growth Hacking</span><span>Prompt</span><span>Disruption</span><span>Brand Love</span><span>A/B Test</span><span>Creator Economy</span><span>Funnel</span><span>Binge</span><span>Agentic</span><span>ROAS</span>
+  </div>
+</div>
+
+<section id="plan">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">תוכנית המדיה של הסמסטר</p>
+        <h2>שש יחידות.<br>במה אחת.</h2>
+      </div>
+      <p>הקורס בנוי כמו משפך: מתחילים מהיסודות, עוברים דרך כל ערוץ שמשנה את כללי המשחק, ונוחתים בבינה מלאכותית. היחידה השביעית שייכת לכם.</p>
+    </div>
+
+    <div class="plan">
+      <article class="unit">
+        <div class="num">01</div>
+        <p class="kicker">INTRO TO MARKETING</p>
+        <h3>מבוא לשיווק</h3>
+        <p>4P, פילוח, מיצוב וערך ללקוח. השפה שכל משווק צריך לפני שהוא נוגע במודל שפה.</p>
+        <ul class="chips"><li>4P</li><li>STP</li><li>מיצוב</li></ul>
+        <a class="stretch" href="#plan"><span>מבוא לשיווק</span></a>
+      </article>
+      <article class="unit">
+        <div class="num">02</div>
+        <p class="kicker">DIGITAL MARKETING</p>
+        <h3>שיווק דיגיטלי</h3>
+        <p>SEO, קמפיינים ממומנים, משפכי המרה ודאטה שמספר לכם מה באמת עבד.</p>
+        <ul class="chips"><li>SEO</li><li>PPC</li><li>אנליטיקס</li></ul>
+        <a class="stretch" href="#plan"><span>שיווק דיגיטלי</span></a>
+      </article>
+      <article class="unit">
+        <div class="num">03</div>
+        <p class="kicker">MARKETING &amp; DISRUPTION</p>
+        <h3>שיווק ושיבוש</h3>
+        <p>איך סטארט-אפ קטן מפרק קטגוריה שלמה, ומה עושים כשאתם המותג שמפרקים.</p>
+        <ul class="chips"><li>חדשנות משבשת</li><li>Growth</li><li>D2C</li></ul>
+        <a class="stretch" href="#plan"><span>שיווק ושיבוש</span></a>
+      </article>
+      <article class="unit">
+        <div class="num">04</div>
+        <p class="kicker">SOCIAL MARKETING</p>
+        <h3>שיווק חברתי</h3>
+        <p>קהילות, משפיענים וקמפיינים שמנסים לשנות התנהגות ולא רק למכור מוצר.</p>
+        <ul class="chips"><li>קהילה</li><li>משפיענים</li><li>שינוי התנהגות</li></ul>
+        <a class="stretch" href="#plan"><span>שיווק חברתי</span></a>
+      </article>
+      <article class="unit">
+        <div class="num">05</div>
+        <p class="kicker">STREAMING ERA</p>
+        <h3>שיווק בעידן הסטרימינג</h3>
+        <p>מנטפליקס ועד ספוטיפיי: המלצות, בינג׳, פרסום בתוך התוכן ותשומת לב כמטבע.</p>
+        <ul class="chips"><li>המלצות</li><li>מנויים</li><li>Content</li></ul>
+        <a class="stretch" href="#plan"><span>שיווק בעידן הסטרימינג</span></a>
+      </article>
+      <article class="unit">
+        <div class="num">06</div>
+        <p class="kicker">MARKETING &amp; AI</p>
+        <h3>שיווק ובינה מלאכותית</h3>
+        <p>פרסונליזציה בזמן אמת, קריאייטיב גנרטיבי, סוכנים שמנהלים קמפיין, והשאלות האתיות שבדרך.</p>
+        <ul class="chips"><li>GenAI</li><li>סוכנים</li><li>אתיקה</li></ul>
+        <a class="stretch" href="#plan"><span>שיווק ובינה מלאכותית</span></a>
+      </article>
+      <article class="unit final">
+        <div class="num">07</div>
+        <div class="body">
+          <p class="kicker">STUDENT PITCHES</p>
+          <h3>פרזנטציות שיווקיות של הסטודנטים</h3>
+          <p>כל צוות לוקח מותג אמיתי, בונה אסטרטגיה עם כלי AI ומציג אותה מול הכיתה. הכי קרוב לחדר ישיבות של משרד פרסום שתגיעו בתואר.</p>
+          <ul class="chips"><li>אסטרטגיה</li><li>פיץ׳</li><li>עבודת צוות</li></ul>
+        </div>
+        <a class="btn" href="#stage" style="position:relative;z-index:2">לבמה ←</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="switch-sec" id="switch">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">אותו מוצר, שני עולמות</p>
+        <h2>אז ועכשיו</h2>
+      </div>
+      <div class="toggle" role="group" aria-label="בחירת תקופה">
+        <button type="button" data-mode="then" aria-pressed="false">2010</button>
+        <button type="button" data-mode="now" aria-pressed="true">2026</button>
+      </div>
+    </div>
+    <div class="compare">
+      <dl class="rows">
+        <div class="row"><dt>מחקר שוק</dt><dd data-then="קבוצת מיקוד אחת, 12 משתתפים, דו״ח אחרי חודש" data-now="ניתוח של אלפי ביקורות ושיחות ברשת תוך שעה">ניתוח של אלפי ביקורות ושיחות ברשת תוך שעה</dd></div>
+        <div class="row"><dt>קריאייטיב</dt><dd data-then="באנר אחד לכולם, שלושה סבבי תיקונים" data-now="עשרות וריאציות שנוצרות ונבחנות במקביל">עשרות וריאציות שנוצרות ונבחנות במקביל</dd></div>
+        <div class="row"><dt>פילוח</dt><dd data-then="נשים 25 עד 34, מרכז הארץ" data-now="קבוצות לפי התנהגות, כוונה והקשר ברגע הצפייה">קבוצות לפי התנהגות, כוונה והקשר ברגע הצפייה</dd></div>
+        <div class="row"><dt>מדידה</dt><dd data-then="חשיפות, ותקווה שזה עבד" data-now="ייחוס רב-ערוצי ולמידה אוטומטית מכל קליק">ייחוס רב-ערוצי ולמידה אוטומטית מכל קליק</dd></div>
+      </dl>
+      <div class="ad" id="ad" data-mode="now">
+        <div class="meta"><span id="adSlot">FEED · PERSONALIZED</span><span>מודעה להמחשה</span></div>
+        <div class="ad-canvas">
+          <h4 id="adHead">נועה, הנעליים שאהבת חזרו למלאי</h4>
+          <p id="adSub">במידה 38, בצבע שבחרת. משלוח עד מחר.</p>
+        </div>
+        <div class="metric"><span>רלוונטיות</span><span class="bar"><i id="adBar" style="width:86%"></i></span><b id="adVal">גבוהה</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stage">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="eyebrow">יחידה 07 · במת הסטודנטים</p>
+        <h2>הפיצ׳ים<br>שלכם</h2>
+      </div>
+      <p>בכל סמסטר הצוותים מציגים קמפיין מקצה לקצה: תובנה, קהל, רעיון גדול, ותוכנית הפעלה עם כלי AI. אלה דוגמאות למה שעולה על הבמה.</p>
+    </div>
+    <div class="stage">
+      <article class="pitch">
+        <div class="cover"><small>דוגמה</small>גלידה שכונתית נגד הענקיות</div>
+        <div class="info">
+          <h3 style="font-size:32px">שיבוש מקומי</h3>
+          <p>גלידרייה קטנה משתמשת בנתוני מזג אוויר ובסוכן תוכן כדי לפרסם טעם יומי לשכונה.</p>
+          <p class="team">צוות 3 · יחידות 03 + 06</p>
+          <div class="vote"><button type="button" aria-pressed="false" data-count="41">♥ אהבתי</button><span>41</span></div>
+        </div>
+      </article>
+      <article class="pitch">
+        <div class="cover"><small>דוגמה</small>פודקאסט שמוכר בלי פרסומות</div>
+        <div class="info">
+          <h3 style="font-size:32px">מותג בתוך התוכן</h3>
+          <p>אסטרטגיית שיתוף פעולה בין מותג ספורט לפודקאסט ריצה, עם מדידה לפי האזנה ולא לפי הורדה.</p>
+          <p class="team">צוות 7 · יחידות 04 + 05</p>
+          <div class="vote"><button type="button" aria-pressed="false" data-count="36">♥ אהבתי</button><span>36</span></div>
+        </div>
+      </article>
+      <article class="pitch">
+        <div class="cover"><small>דוגמה</small>קמפיין תרומת דם לדור Z</div>
+        <div class="info">
+          <h3 style="font-size:32px">שיווק חברתי</h3>
+          <p>תזכורות מותאמות אישית וקהילת תורמים חוזרים, עם שיחה פתוחה על פרטיות ושימוש בדאטה.</p>
+          <p class="team">צוות 1 · יחידות 04 + 06</p>
+          <div class="vote"><button type="button" aria-pressed="false" data-count="52">♥ אהבתי</button><span>52</span></div>
+        </div>
+      </article>
+    </div>
+    <p class="note">כל הפרויקטים בעמוד הם דוגמאות שנכתבו לצורך המוק-אפ.</p>
+  </div>
+</section>
+
+<div class="cta-band" id="join">
+  <div class="wrap">
+    <h2>הקמפיין הבא<br>מתחיל כאן.</h2>
+    <div>
+      <p>הקורס פתוח לסטודנטים במחלקה למדעי המידע ויישומי בינה מלאכותית. הביאו סקרנות, מחשב נייד ורעיון למותג שאתם אוהבים.</p>
+      <div class="cta-row">
+        <a class="btn" href="#top">להרשמה לקורס</a>
+        <a class="btn ghost" href="#plan">לסילבוס</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <b>שיווק בעידן ה-AI</b>
+    <span>המחלקה למדעי המידע ויישומי בינה מלאכותית · אוניברסיטת בר-אילן</span>
+  </div>
+</footer>
+</div>
+
+<script>
+(function(){
+  document.documentElement.lang = "he";
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ---- campaign generator ----
+  var T = {
+    bold: {
+      slogans: ["{p}. לא מחכים לאף אחד.", "{p} שובר את החוקים.", "שכחו כל מה שידעתם על {p}.", "{p}. הבא בתור כבר כאן."],
+      personas: ["סטודנטית בת 22, שלוש משמרות בשבוע, אפס זמן", "יזם בן 29 שבודק כל דבר פעמיים", "גיימרית בת 19 שלא סובלת פרסומות"],
+      channels: ["טיקטוק + סטוריז, בשעות 07:00 עד 09:00", "יוטיוב שורטס + שלטי חוצות דיגיטליים", "שיתוף פעולה עם קריאייטור נישתי"],
+      kpis: ["שיעור צפייה מלאה בסרטון של 15 שניות", "עלות לרכישה ראשונה", "שיתופים לכל אלף חשיפות"],
+      tags: ["#NoWait", "#BreakTheRules", "#NextLevel"]
+    },
+    funny: {
+      slogans: ["{p}: כי לחיים אין כפתור Undo.", "אמא אמרה לא לקנות {p}. סליחה אמא.", "{p}. האלגוריתם כבר יודע שתאהבו.", "גם ה-AI ביקש {p}."],
+      personas: ["סטודנט בן 24 שחי על ממים", "מנהלת סושיאל בת 31 שראתה הכל", "אבא טרי שגולל בשלוש בלילה"],
+      channels: ["רילס עם טרנד סאונד שבועי", "ממים בקבוצות וואטסאפ ובדיסקורד", "פרסומת בתוך פודקאסט קומי"],
+      kpis: ["תגובות לכל פוסט", "שמירות של הסרטון", "צמיחה בעוקבים אורגניים"],
+      tags: ["#OopsIBoughtIt", "#AlgorithmKnows", "#SorryMom"]
+    },
+    warm: {
+      slogans: ["{p}. בשביל הרגעים הקטנים.", "כל סיפור טוב מתחיל עם {p}.", "{p}, כמו שסבתא הייתה ממליצה.", "{p}. כי מגיע לכם רגע לעצמכם."],
+      personas: ["אמא בת 38 שמחפשת עשר דקות שקט", "סטודנט בן 26 רחוק מהבית", "זוג צעיר בדירה הראשונה"],
+      channels: ["סרטון סיפור בפייסבוק + ניוזלטר", "סדרת פודקאסט קצרה עם המותג", "קמפיין תוכן גולשים באינסטגרם"],
+      kpis: ["זמן צפייה ממוצע", "אזכורים חיוביים ברשת", "שיעור חזרה לרכישה"],
+      tags: ["#SmallMoments", "#HomeFeeling", "#MeTime"]
+    }
+  };
+  var tone = "bold", gen = 0;
+  var $ = function(id){return document.getElementById(id)};
+  function pick(a){return a[Math.floor(Math.random()*a.length)]}
+  function type(el, text, done){
+    var my = ++gen;
+    if(reduce){el.textContent = text; done && done(); return;}
+    el.textContent = ""; var i = 0;
+    (function step(){
+      if(my !== gen) return;
+      el.textContent = text.slice(0, ++i);
+      if(i < text.length) setTimeout(step, 28); else done && done();
+    })();
+  }
+  function run(){
+    var p = ($("product").value || "").trim() || "המוצר שלכם";
+    var t = T[tone];
+    ["persona","channel","kpi"].forEach(function(k){$(k).style.opacity = .3});
+    type($("slogan"), pick(t.slogans).replace(/\{p\}/g, p), function(){
+      $("persona").textContent = pick(t.personas);
+      $("channel").textContent = pick(t.channels);
+      $("kpi").textContent = pick(t.kpis);
+      $("hashtag").textContent = pick(t.tags);
+      ["persona","channel","kpi"].forEach(function(k){$(k).style.opacity = 1});
+    });
+  }
+  $("genForm").addEventListener("submit", function(e){e.preventDefault(); run();});
+  document.querySelectorAll(".tone").forEach(function(b){
+    b.addEventListener("click", function(){
+      tone = b.dataset.tone;
+      document.querySelectorAll(".tone").forEach(function(x){x.setAttribute("aria-pressed", x === b)});
+      run();
+    });
+  });
+
+  // ---- then / now ----
+  var AD = {
+    then: {slot:"BANNER · ONE SIZE FITS ALL", head:"מבצע! 20% הנחה על כל החנות", sub:"רק השבוע. לכולם. בכל מקום.", bar:"18%", val:"נמוכה"},
+    now:  {slot:"FEED · PERSONALIZED", head:"נועה, הנעליים שאהבת חזרו למלאי", sub:"במידה 38, בצבע שבחרת. משלוח עד מחר.", bar:"86%", val:"גבוהה"}
+  };
+  document.querySelectorAll(".toggle button").forEach(function(b){
+    b.addEventListener("click", function(){
+      var m = b.dataset.mode;
+      document.querySelectorAll(".toggle button").forEach(function(x){x.setAttribute("aria-pressed", x === b)});
+      document.querySelectorAll(".row dd").forEach(function(dd){dd.textContent = dd.dataset[m]});
+      var a = AD[m];
+      $("ad").dataset.mode = m;
+      $("adSlot").textContent = a.slot; $("adHead").textContent = a.head; $("adSub").textContent = a.sub;
+      $("adBar").style.width = a.bar; $("adVal").textContent = a.val;
+    });
+  });
+
+  // ---- votes ----
+  document.querySelectorAll(".vote button").forEach(function(b){
+    b.addEventListener("click", function(){
+      var on = b.getAttribute("aria-pressed") !== "true";
+      b.setAttribute("aria-pressed", on);
+      b.nextElementSibling.textContent = +b.dataset.count + (on ? 1 : 0);
+    });
+  });
+})();
+</script>
